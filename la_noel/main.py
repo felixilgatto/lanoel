@@ -13,7 +13,7 @@ async def root():
     return "hello world!"
 
 
-@app.post("/secret-santa/draw")
+@app.post("/v1/secret-santa-draw")
 async def secret_santa(draw: Draw):
     pair = []
     members = draw.members
