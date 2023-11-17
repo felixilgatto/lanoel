@@ -1,20 +1,13 @@
 version: '3'
 
 networks:
-  apigateway:
-
-volumes:
-  budibase_data:
+  budibase_backend:
+    external: true
 
 services:
-  la-noel:
-    container_name: la-noel
-    image: la-loel:latest
-    ports:
-      - 8080:80
-    build: ./
+  lanoel:
+    container_name: lanoel
+    image: registry.justmammoth.us/lanoel:${IMAGE_VERSION}
     restart: unless-stopped
-    volumes:
-      - budibase_data:/data
     networks:
-      - apigateway
+      - budibase_backend
