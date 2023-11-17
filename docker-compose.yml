@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  apigateway:
+
+volumes:
+  budibase_data:
+
+services:
+  la-noel:
+    container_name: la-noel
+    image: la-loel:latest
+    ports:
+      - 8080:80
+    build: ./
+    restart: unless-stopped
+    volumes:
+      - budibase_data:/data
+    networks:
+      - apigateway
