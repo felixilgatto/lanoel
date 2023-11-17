@@ -24,18 +24,18 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.REGISTRY_URL }}/${{ env.PROJECT_NAME }}:latest
+          tags: ${{ secrets.REGISTRY_URL }}/${{ vars.PROJECT_NAME }}:latest
       - name: Build and push as ${{ github.ref_name }}
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.REGISTRY_URL }}/${{ env.PROJECT_NAME }}:${{ github.ref_name }}
+          tags: ${{ secrets.REGISTRY_URL }}/${{ vars.PROJECT_NAME }}:${{ github.ref_name }}
 
   deploy:
     uses: justmammoth-us/server-actions/.github/workflows/stack_deployment.yml@main
     needs: [build-and-push]
     with:
-      name: ${{ env.PROJECT_NAME }}
+      name: ${{ vars.PROJECT_NAME }}
       repository: ${{ github.repository }}
       branch: main
       file: docker-compose.yml
