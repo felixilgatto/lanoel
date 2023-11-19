@@ -3,7 +3,7 @@ import random
 from fastapi import FastAPI, HTTPException
 
 from .request_model import Draw
-from .utils import inner_category, max_count, outter_category
+from .utils import has_duplicate_names, inner_category, max_count, outter_category
 
 app = FastAPI()
 
@@ -15,30 +15,36 @@ async def root():
 
 @app.post("/v1/secret-santa-draw")
 async def secret_santa(draw: Draw):
+    participants = draw.participants
+
+    if has_duplicate_names(participants):
+        raise HTTPException(
+            status_code=422,
+            detail="Their are a duplicate name in the participants list.",
+        )
+
+    givers = participants.copy()
+    receivers = participants.copy()
+
     pair = []
-    members = draw.members
-
-    santas = members.copy()
-    childs = members.copy()
-
     while True:
-        category = max_count(santas)
+        category = max_count(givers)
 
-        inner = inner_category(santas, category)
-        outter = outter_category(childs, category)
+        inner = inner_category(givers, category)
+        outter = outter_category(receivers, category)
 
-        santa = random.choice(inner)
-        child = random.choice(outter if len(outter) > 0 else members)
+        giver = random.choice(inner)
+        receiver = random.choice(outter if len(outter) > 0 else participants)
 
-        santas.remove(santa)
-        childs.remove(child)
+        givers.remove(giver)
+        receivers.remove(receiver)
 
-        pair.append((santa, child))
+        pair.append({"giver": giver.name, "receiver": receiver.name})
 
-        if len(santas) == 0:
+        if len(givers) == 0:
             break
 
-    return pair
+    return {"result": pair}
 
 
 # if _name_ == "_main_":

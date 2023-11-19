@@ -5,11 +5,11 @@ from pydantic import Field
 
 
 @dataclass
-class Member:
-    name: str
-    category: str
+class Participant:
+    name: str = Field(max_length=50)
+    category: str = Field(max_length=50)
 
 
 @dataclass
 class Draw:
-    members: List[Member] = Field(min_length=1)
+    participants: List[Participant] = Field(min_length=2, max_length=100)

@@ -1,8 +1,8 @@
-POST http://localhost:8080/secret-santa/draw
+POST http://localhost:8080/v1/secret-santa-draw
 Content-Type: application/json
 
 {
-  "members": [
+  "participants": [
     {"name": "Isabelle", "category": "jean-louis"},
     {"name": "Jean-Louis", "category": "jean-louis"},
     {"name": "Chloe", "category": "jean-louis"},
@@ -18,4 +18,4 @@ Content-Type: application/json
     {"name": "Paulette", "category": "paulette"}
   ]
 }
-curl --request POST --url http://172.28.240.1:8080/secret-santa/draw --header 'content-type: application/json' --header 'user-agent: vscode-restclient' --data '{"members": [{"name": "Isabelle", "category": "jean-louis"},{"name": "Jean-Louis", "category": "jean-louis"},{"name": "Chloe", "category": "jean-louis"},{"name": "Edouard", "category": "jean-louis"},{"name": "Lola", "category": "jean-louis"},{"name": "Emilien", "category": "jean-louis"},{"name": "Felix", "category": "patrick"},{"name": "Romain", "category": "patrick"},{"name": "Patrick", "category": "patrick"},{"name": "Anne", "category": "patrick"},{"name": "Cecile", "category": "cecile"},{"name": "Hubert", "category": "cecile"},{"name": "Paulette", "category": "paulette"}]}'
+###
