@@ -1,26 +1,31 @@
 import random
+from dataclasses import dataclass
 
-from fastapi import FastAPI, HTTPException
-
-from .request_model import Draw
-from .utils import has_duplicate_names, inner_category, max_count, outter_category
-
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return "hello world!"
+from lanoel.utils import (
+    has_duplicate_names,
+    inner_category,
+    max_count,
+    outter_category,
+)
 
 
-@app.post("/v1/secret-santa-draw")
-async def secret_santa(draw: Draw):
-    participants = draw.participants
+@dataclass
+class Participant:
+    name: str
+    category: str
+
+
+@dataclass
+class Pair:
+    giver: str
+    receiver: str
+
+
+def secret_santa(participants: list[Participant]):
 
     if has_duplicate_names(participants):
-        raise HTTPException(
-            status_code=422,
-            detail="Their are a duplicate name in the participants list.",
+        raise Exception(
+            "Their are a duplicate name in the participants list.",
         )
 
     givers = participants.copy()
@@ -39,15 +44,20 @@ async def secret_santa(draw: Draw):
         givers.remove(giver)
         receivers.remove(receiver)
 
-        pair.append({"giver": giver.name, "receiver": receiver.name})
+        pair.append(Pair(giver.name, receiver.name))
 
         if len(givers) == 0:
             break
 
-    return {"result": pair}
+    return pair
 
 
-# if _name_ == "_main_":
+if __name__ == "__main__":
+    participants = [Participant("Oliver", "Tuner")]
+    res = secret_santa(participants)
+    print(res)
+
+
 #     category_field = "cat"
 #     json_path = "members.json"
 
