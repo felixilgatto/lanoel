@@ -2,7 +2,7 @@
 name = "lanoel"
 version = "0.1.0"
 description = "A Secret Santa generator for groups of people."
-authors = ["felixcapuano <essais2615@gmail.com>"]
+authors = ["felixilgatto <essais2615@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
