@@ -21,10 +21,16 @@ pip install lanoel
 To use lanoel, simply run the following command:
 
 ```bash
-lanoel
-```
+$lanoel --help
+usage: lanoel [-h] [-p PARTICIPANT] [-f FILE]
 
-This will prompt you to enter the names of participants and their categories.
+options:
+  -h, --help            show this help message and exit
+  -p PARTICIPANT, --participant PARTICIPANT
+                        The name of participants and optionally category separated by a semicolon. If category is not
+                        provided, the participant will be in the default category. ex: Oliver,Tuner
+  -f FILE, --file FILE  The path of the csv file. The file should be in the format 'name;category'.
+```
 
 ## Features
 

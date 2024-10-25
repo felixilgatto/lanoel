@@ -54,7 +54,6 @@ def entrypoint():
     )
 
     args = parser.parse_args()
-    print(args)
 
     participants = []
     if args.participant:
