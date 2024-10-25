@@ -1,7 +1,4 @@
-Here's a basic README.md for the lanoel package:
-
-````markdown
-# Lanoel
+# La Noel (Secret Santa)
 
 A Secret Santa generator for groups of people.
 
@@ -18,7 +15,6 @@ To install lanoel, run the following command:
 ```bash
 pip install lanoel
 ```
-````
 
 ## Usage
 
@@ -35,8 +31,3 @@ This will prompt you to enter the names of participants and their categories.
 - Generate Secret Santa pairs for groups of people
 - Support for categories to ensure participants are not paired with someone from the same category
 - Easy to use command-line interface
-
-```
-
-Please note that this is just a basic template, and you can add or remove sections as necessary to better fit your package's needs.
-```

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lanoel"
-version = "0.1.0"
+version = "0.1.2"
 description = "A Secret Santa generator for groups of people."
 authors = ["felixilgatto <essais2615@gmail.com>"]
 readme = "README.md"
