@@ -16,7 +16,7 @@ def parse_participant(participant_str: str, separator: str) -> Participant:
 
     participant_args = participant_str.split(separator)
     if len(participant_args) != 2:
-        raise ValueError(f"Invalid participant string: {participant_str}")
+        sys.exit(f"Invalid participant string: {participant_str}")
     name, category = participant_args
 
     return Participant(name.strip(), category.strip())
@@ -72,11 +72,14 @@ def entrypoint():
                 ]
             )
 
-    if not participants:
-        sys.exit("No participants provided.")
+    if len(participants) <= 1:
+        sys.exit("The number of participants must be greater than 1.")
 
     output_participants(participants)
 
     result = secret_santa(participants)
+
+    if len(result) != len(participants):
+        sys.exit("The number of participants does not match the number of pairs.")
 
     output_pairs(result)
